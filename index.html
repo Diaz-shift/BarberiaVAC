@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbería VAC — Sesión 01</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --azul:  #2D3F6B;
+  --lima:  #BADA1E;
+  --blanco: #FFFFFF;
+  --negro:  #0A0A0A;
+  --gris:   #6B6B6B;
+  --gris-claro: #E8E8E8;
+  --azul-claro: #E8EBF3;
+}
+
+body {
+  background: var(--blanco);
+  color: var(--negro);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+/* ─── TIPOGRAFÍA ─── */
+.display {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.display-italic {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 0.9;
+}
+
+.label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--azul);
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.hero-nav .label { color: rgba(255,255,255,0.45); }
+.hero-nav .marca { color: var(--lima); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+
+.hero-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3rem 3rem;
+  position: relative;
+}
+
+.hero-tag {
+  background: var(--lima);
+  color: var(--negro);
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  align-self: flex-start;
+}
+
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(5rem, 14vw, 11rem);
+  color: var(--blanco);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  margin-bottom: 2.5rem;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--lima);
+}
+
+.hero-sub {
+  max-width: 480px;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  border-left: 2px solid var(--lima);
+  padding-left: 1.25rem;
+}
+
+.hero-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem 3rem;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.hero-footer .label { color: rgba(255,255,255,0.3); }
+
+.sesion-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 8rem;
+  color: rgba(255,255,255,0.06);
+  line-height: 1;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+}
+
+/* ─── SECCIONES GENÉRICAS ─── */
+section { border-bottom: 1px solid var(--gris-claro); }
+
+.s-blanco { background: var(--blanco); }
+.s-negro  { background: var(--negro); color: var(--blanco); }
+.s-azul   { background: var(--azul);  color: var(--blanco); }
+.s-lima   { background: var(--lima);  color: var(--negro); }
+
+/* ─── OBJETIVO ─── */
+.objetivo {
+  background: var(--lima);
+  padding: 5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.objetivo-label { }
+.objetivo-label .label { color: rgba(0,0,0,0.5); }
+.objetivo-label .num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 7rem;
+  color: var(--negro);
+  line-height: 1;
+  margin-top: 0.5rem;
+  opacity: 0.12;
+}
+
+.objetivo-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--negro);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.objetivo-content p {
+  font-size: 1.1rem;
+  color: rgba(0,0,0,0.7);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ─── AGENDA TIMELINE ─── */
+.agenda {
+  background: var(--blanco);
+  padding: 5rem 3rem;
+}
+
+.agenda-header {
+  margin-bottom: 3rem;
+}
+
+.agenda-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--negro);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+
+.agenda-row {
+  display: grid;
+  grid-template-columns: 80px 2px 1fr;
+  gap: 0 2rem;
+  margin-bottom: 0;
+}
+
+.agenda-item-wrap {
+  display: contents;
+}
+
+.a-time {
+  font-size: 0.7rem;
+  color: var(--gris);
+  letter-spacing: 0.08em;
+  padding: 1.5rem 0;
+  text-align: right;
+}
+
+.a-line {
+  width: 2px;
+  background: var(--gris-claro);
+  position: relative;
+}
+
+.a-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--azul);
+  border-radius: 50%;
+  position: absolute;
+  top: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.a-dot.lima { background: var(--lima); }
+
+.a-content {
+  padding: 1.25rem 0 1.25rem 0;
+  border-bottom: 1px solid var(--gris-claro);
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.a-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  color: var(--azul);
+  line-height: 1;
+}
+
+.a-info h3 {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--negro);
+  margin-bottom: 0.2rem;
+}
+
+.a-info p { font-size: 0.8rem; color: var(--gris); }
+
+.a-dur {
+  background: var(--azul-claro);
+  color: var(--azul);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+}
+
+/* ─── BLOQUE SECTION ─── */
+.bloque-section {
+  padding: 5rem 3rem;
+}
+
+.bloque-section.alt { background: var(--negro); }
+.bloque-section.mid { background: var(--azul-claro); }
+
+.bs-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  margin-bottom: 3rem;
+  gap: 2rem;
+}
+
+.bs-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  max-width: 600px;
+}
+
+.bs-header h2.blanco { color: var(--blanco); }
+
+.bs-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 6rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  opacity: 0.12;
+  color: var(--negro);
+}
+
+.bs-num.blanco { color: var(--blanco); }
+
+.intro-p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--gris);
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+
+.intro-p.blanco { color: rgba(255,255,255,0.55); }
+
+/* ─── PREGUNTAS GRID ─── */
+.preguntas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--gris-claro);
+}
+
+.pregunta-cell {
+  padding: 1.5rem;
+  border-right: 1px solid var(--gris-claro);
+  border-bottom: 1px solid var(--gris-claro);
+}
+
+.pregunta-cell:nth-child(even) { border-right: none; }
+
+.pregunta-cell .q-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--lima);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.pregunta-cell h4 {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--negro);
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.pregunta-cell p { font-size: 0.78rem; color: var(--gris); line-height: 1.55; }
+
+/* ─── ACTIVIDAD BOX ─── */
+.actividad {
+  background: var(--azul);
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+}
+
+.act-tag {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lima);
+  margin-bottom: 0.5rem;
+}
+
+.actividad h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--blanco);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+
+.actividad p { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+/* ─── CIERRE BLOQUE 1 ─── */
+.cierre-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--gris-claro);
+  border: 1px solid var(--gris-claro);
+  margin-top: 2rem;
+}
+
+.cierre-item {
+  background: var(--blanco);
+  padding: 1.75rem 1.5rem;
+}
+
+.cierre-item .c-icon {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: var(--azul);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  opacity: 0.3;
+}
+
+.cierre-item h4 { font-weight: 500; font-size: 0.95rem; color: var(--negro); margin-bottom: 0.35rem; }
+.cierre-item p { font-size: 0.8rem; color: var(--gris); line-height: 1.55; }
+
+/* ─── CLIENTE PERFILES ─── */
+.perfiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--gris-claro);
+  border: 1px solid var(--gris-claro);
+}
+
+.perfil-card {
+  background: var(--blanco);
+  padding: 2rem 1.5rem;
+}
+
+.perfil-initial {
+  width: 48px;
+  height: 48px;
+  background: var(--azul);
+  color: var(--blanco);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.perfil-card h4 { font-weight: 500; font-size: 0.95rem; color: var(--negro); margin-bottom: 0.25rem; }
+.perfil-zona {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--azul);
+  margin-bottom: 0.75rem;
+}
+.perfil-card p { font-size: 0.8rem; color: var(--gris); line-height: 1.6; }
+
+/* ─── PROPUESTA TABLA ─── */
+.pv-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--gris-claro);
+  margin-top: 2rem;
+}
+
+table.pv {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+table.pv thead th {
+  background: var(--azul);
+  color: var(--blanco);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 1.25rem;
+  text-align: left;
+}
+
+table.pv thead th:first-child { background: var(--negro); }
+
+table.pv tbody td {
+  padding: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--negro);
+  border-bottom: 1px solid var(--gris-claro);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+table.pv tbody tr:last-child td { border-bottom: none; }
+table.pv tbody tr:nth-child(even) td { background: #FAFAFA; }
+
+.pv-badge {
+  display: inline-block;
+  background: var(--lima);
+  color: var(--negro);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+/* ─── FRASE PLANTILLA ─── */
+.frase-box {
+  background: var(--lima);
+  padding: 3rem;
+  margin-top: 2rem;
+}
+
+.frase-box .label { color: rgba(0,0,0,0.4); margin-bottom: 1rem; }
+
+.frase-box blockquote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--negro);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.frase-blank {
+  display: inline-block;
+  border-bottom: 3px solid var(--negro);
+  min-width: 120px;
+  margin: 0 0.2em;
+}
+
+/* ─── SERVICIOS ─── */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.servicio-cell {
+  background: var(--negro);
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.s-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 3.5rem;
+  color: var(--azul);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.servicio-cell h4 { font-weight: 500; font-size: 0.95rem; color: var(--blanco); margin-bottom: 0.35rem; }
+.servicio-cell p { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.55; }
+
+.servicio-cell.abierto { border: 1px solid rgba(186,218,30,0.4); background: rgba(186,218,30,0.05); }
+.servicio-cell.abierto .s-num { color: var(--lima); }
+.servicio-cell.abierto h4 { color: var(--lima); }
+.servicio-cell.abierto p { color: rgba(186,218,30,0.6); font-style: italic; }
+
+/* ─── CANVAS MODELO ─── */
+.canvas-wrap {
+  margin-top: 2.5rem;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.canvas-row {
+  display: grid;
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.canvas-row.tres { grid-template-columns: repeat(3, 1fr); }
+.canvas-row.dos  { grid-template-columns: 1fr 1fr; }
+
+.canvas-cell {
+  background: #111;
+  padding: 1.5rem;
+}
+
+.canvas-cell.destacado { background: var(--azul); }
+.canvas-cell.lima-cell { background: var(--lima); }
+
+.canvas-cell h4 {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lima);
+  margin-bottom: 0.6rem;
+}
+
+.canvas-cell.lima-cell h4 { color: rgba(0,0,0,0.5); }
+.canvas-cell.destacado h4 { color: rgba(255,255,255,0.5); }
+
+.canvas-cell p { font-size: 0.83rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.canvas-cell.lima-cell p { color: rgba(0,0,0,0.65); }
+.canvas-cell.destacado p { color: rgba(255,255,255,0.75); }
+
+/* ─── ENTREGABLE ─── */
+.entregable-section {
+  background: var(--azul);
+  padding: 5rem 3rem;
+}
+
+.entregable-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  color: var(--blanco);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+
+.entregable-section h2 em { color: var(--lima); }
+
+.entregable-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.e-item {
+  background: rgba(255,255,255,0.04);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.e-check {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--lima);
+  font-size: 1rem;
+  margin-top: 0.05rem;
+  flex-shrink: 0;
+}
+
+.e-item p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.55; }
+
+.proxima {
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  border-left: 3px solid var(--lima);
+  background: rgba(186,218,30,0.07);
+}
+
+.proxima .label { color: var(--lima); margin-bottom: 0.5rem; }
+.proxima p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.proxima strong { color: var(--blanco); font-weight: 500; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--negro);
+  padding: 1.75rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #1a1a1a;
+}
+
+footer .label { color: #333; }
+
+.footer-marca {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--lima);
+  letter-spacing: -0.01em;
+}
+
+/* ─── DIVISOR EDITORIAL ─── */
+.editorial-break {
+  background: var(--lima);
+  padding: 2.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editorial-break span {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--negro);
+  letter-spacing: -0.02em;
+}
+
+.editorial-break .arrow {
+  font-size: 2rem;
+  color: var(--negro);
+  opacity: 0.4;
+}
+
+/* ─── PRINT ─── */
+@media print {
+  .hero { min-height: auto; }
+  .sesion-num { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<header class="hero">
+  <nav class="hero-nav">
+    <span class="label">Voluntariado · Escuela de Negocios</span>
+    <span class="marca">Barbería VAC</span>
+  </nav>
+
+  <div class="hero-body">
+    <div class="hero-tag">Sesión 01 de 04</div>
+
+    <div class="hero-h1">
+      Modelo<br>
+      de <em>Negocio</em><br>
+      & Valor.
+    </div>
+
+    <p class="hero-sub">
+      Del oficio al emprendimiento. En esta sesión construimos juntos las bases de un negocio real: quién es nuestro cliente, qué problema le resolvemos y por qué nos va a elegir a nosotros.
+    </p>
+
+    <div class="sesion-num">01</div>
+  </div>
+
+  <div class="hero-footer">
+    <span class="label">Duración · 2 horas · Taller participativo</span>
+    <span class="label">Caracas, Venezuela · Zonas Oeste</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     OBJETIVO
+════════════════════════════════════════ -->
+<div class="objetivo">
+  <div class="objetivo-label">
+    <div class="label">Objetivo de la sesión</div>
+    <div class="num">01</div>
+  </div>
+  <div class="objetivo-content">
+    <h2>Al salir de aquí,<br>sabes a quién<br>le vendes.</h2>
+    <p>Cada participante tendrá claro quién es su cliente, qué problema le resuelve y por qué ese cliente debería elegirlo a él por encima de cualquier otro barbero en su zona.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     AGENDA
+════════════════════════════════════════ -->
+<div class="agenda">
+  <div class="agenda-header">
+    <div class="label" style="color:var(--gris);">Estructura de la sesión</div>
+    <h2>¿Cómo vamos<br><em style="font-style:italic;">a trabajar hoy?</em></h2>
+  </div>
+
+  <div class="agenda-row">
+
+    <div class="a-time">0 – 25<br>min</div>
+    <div class="a-line"><div class="a-dot"></div></div>
+    <div class="a-content">
+      <div class="a-num">01</div>
+      <div class="a-info">
+        <h3>Diagnóstico inicial</h3>
+        <p>¿Quiénes somos y cómo trabajamos hoy?</p>
+      </div>
+      <div class="a-dur">25 min</div>
+    </div>
+
+    <div class="a-time">25 – 55<br>min</div>
+    <div class="a-line"><div class="a-dot lima"></div></div>
+    <div class="a-content">
+      <div class="a-num">02</div>
+      <div class="a-info">
+        <h3>Cliente objetivo</h3>
+        <p>¿A quién le queremos vender?</p>
+      </div>
+      <div class="a-dur">30 min</div>
+    </div>
+
+    <div class="a-time">55 – 85<br>min</div>
+    <div class="a-line"><div class="a-dot"></div></div>
+    <div class="a-content">
+      <div class="a-num">03</div>
+      <div class="a-info">
+        <h3>Propuesta de valor</h3>
+        <p>¿Por qué nos van a elegir a nosotros?</p>
+      </div>
+      <div class="a-dur">30 min</div>
+    </div>
+
+    <div class="a-time">85 – 120<br>min</div>
+    <div class="a-line"><div class="a-dot lima"></div></div>
+    <div class="a-content" style="border-bottom:none;">
+      <div class="a-num">04</div>
+      <div class="a-info">
+        <h3>Modelo inicial del negocio</h3>
+        <p>¿Cómo va a funcionar nuestro servicio?</p>
+      </div>
+      <div class="a-dur">35 min</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     BLOQUE 01: DIAGNÓSTICO
+════════════════════════════════════════ -->
+<div class="editorial-break">
+  <span>Bloque 01 — Diagnóstico</span>
+  <span class="arrow">→</span>
+</div>
+
+<div class="bloque-section">
+  <div class="bs-header">
+    <h2>¿Quiénes somos<br>y cómo trabajamos<br><em style="font-style:italic;">hoy?</em></h2>
+    <div class="bs-num">01</div>
+  </div>
+
+  <p class="intro-p">
+    Antes de construir cualquier negocio, necesitamos saber con qué contamos. No es un examen. No hay respuestas incorrectas. Es una conversación honesta entre nosotros para entender dónde estamos parados antes de arrancar.
+  </p>
+
+  <div class="label" style="color:var(--gris); margin-bottom:1rem;">Ronda de presentación — 15 minutos — Responder en voz alta</div>
+
+  <div class="preguntas-grid">
+    <div class="pregunta-cell">
+      <div class="q-num">01</div>
+      <h4>¿Cuántos años llevas trabajando como barbero?</h4>
+      <p>Identifica la experiencia técnica del grupo.</p>
+    </div>
+    <div class="pregunta-cell">
+      <div class="q-num">02</div>
+      <h4>¿Dónde trabajas hoy? ¿Cómo consigues tus clientes?</h4>
+      <p>Revela el modelo actual: informal, referidos, local propio.</p>
+    </div>
+    <div class="pregunta-cell">
+      <div class="q-num">03</div>
+      <h4>¿Cuántos clientes atiendes en una semana normal?</h4>
+      <p>Da una idea del volumen y la capacidad operativa real.</p>
+    </div>
+    <div class="pregunta-cell">
+      <div class="q-num">04</div>
+      <h4>¿Cuánto cobras por un corte? ¿Por qué ese precio?</h4>
+      <p>Revela si hay estructura de precios o si es pura intuición.</p>
+    </div>
+    <div class="pregunta-cell">
+      <div class="q-num">05</div>
+      <h4>¿Qué es lo que más te gusta de ser barbero?</h4>
+      <p>Conecta con la motivación. Es la base de cualquier propuesta de valor.</p>
+    </div>
+    <div class="pregunta-cell">
+      <div class="q-num">06</div>
+      <h4>¿Qué es lo que más te complica del trabajo hoy?</h4>
+      <p>Identifica los problemas reales que el proyecto va a resolver.</p>
+    </div>
+  </div>
+
+  <div class="cierre-grid">
+    <div class="cierre-item">
+      <div class="c-icon">I</div>
+      <h4>Todos tienen la habilidad técnica.</h4>
+      <p>Eso es lo más difícil y ya lo tienen. El corte, la barba, el trato con el cliente: eso no se improvisa.</p>
+    </div>
+    <div class="cierre-item">
+      <div class="c-icon">II</div>
+      <h4>Lo que falta es estructura.</h4>
+      <p>No es culpa de nadie. Nadie enseña esto en la escuela. Por eso estamos aquí.</p>
+    </div>
+    <div class="cierre-item">
+      <div class="c-icon">III</div>
+      <h4>Eso es exactamente para lo que estamos aquí.</h4>
+      <p>A construir esa estructura juntos, paso a paso, en cuatro sesiones.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     BLOQUE 02: CLIENTE OBJETIVO
+════════════════════════════════════════ -->
+<div class="editorial-break">
+  <span>Bloque 02 — Cliente objetivo</span>
+  <span class="arrow">→</span>
+</div>
+
+<div class="bloque-section">
+  <div class="bs-header">
+    <h2>¿A quién le<br>vamos a<br><em style="font-style:italic;">vender?</em></h2>
+    <div class="bs-num">02</div>
+  </div>
+
+  <p class="intro-p">
+    Cuando intentas venderle a todos, no le hablas a nadie. Necesitamos ser específicos. Estamos en Caracas oeste — Antimano, Caricuao, El Paraíso, La Vega, Montalbán. Nuestro cliente no es un abstracto. Es un vecino real.
+  </p>
+
+  <div class="perfiles-grid">
+    <div class="perfil-card">
+      <div class="perfil-initial">JM</div>
+      <h4>El trabajador activo</h4>
+      <div class="perfil-zona">Montalbán · El Paraíso</div>
+      <p>25 a 40 años, trabaja de lunes a viernes. No tiene tiempo de ir a una barbería en horario comercial. Valora que lleguen a su casa o que lo atiendan en horario nocturno o fin de semana.</p>
+    </div>
+    <div class="perfil-card">
+      <div class="perfil-initial">PA</div>
+      <h4>El papá de familia</h4>
+      <div class="perfil-zona">Caricuao · Antimano</div>
+      <p>Busca un servicio que incluya a sus hijos. Valora confianza, puntualidad y precio justo. Es el cliente más fiel si lo tratas bien. Puede convertirse en membresía mensual recurrente.</p>
+    </div>
+    <div class="perfil-card">
+      <div class="perfil-initial">CR</div>
+      <h4>El joven que cuida su imagen</h4>
+      <div class="perfil-zona">La Vega · Zonas mixtas</div>
+      <p>18 a 28 años. Está pendiente del corte perfecto y comparte en redes sociales. Es el mejor promotor gratuito si queda satisfecho. Un cliente así puede traerte tres más por WhatsApp.</p>
+    </div>
+  </div>
+
+  <div class="actividad">
+    <div class="act-tag">Actividad en parejas — 15 minutos</div>
+    <h4>Construye tu cliente ideal</h4>
+    <p>En parejas: ¿Cómo se llama tu cliente ideal? ¿Cuántos años tiene? ¿En qué trabaja? ¿A qué hora puede atenderse? ¿Cuánto pagaría sin quejarse? ¿Por qué te elegiría a ti y no a otro?<br><br>
+    <strong style="color:var(--lima);">Al final, cada pareja presenta su cliente en 60 segundos.</strong></p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     BLOQUE 03: PROPUESTA DE VALOR
+════════════════════════════════════════ -->
+<div class="editorial-break">
+  <span>Bloque 03 — Propuesta de valor</span>
+  <span class="arrow">→</span>
+</div>
+
+<div class="bloque-section">
+  <div class="bs-header">
+    <h2>¿Por qué nos van<br>a elegir<br><em style="font-style:italic;">a nosotros?</em></h2>
+    <div class="bs-num">03</div>
+  </div>
+
+  <p class="intro-p">
+    La propuesta de valor no es el precio. No es la tijera. Es la combinación de qué ofreces, cómo lo ofreces y a quién se lo ofreces. La barbería a domicilio tiene ventajas únicas. Aprendamos a comunicarlas.
+  </p>
+
+  <div class="pv-wrap">
+    <table class="pv">
+      <thead>
+        <tr>
+          <th>Problema del cliente</th>
+          <th>Lo que ofrece Barbería VAC</th>
+          <th>Cómo lo siente el cliente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="pv-badge">Tiempo</div><br>Pierde horas en traslado y espera. Las barberías abren cuando él trabaja.</td>
+          <td>Atención a domicilio con cita programada. Sin espera, sin traslado.</td>
+          <td><em>"Me atendieron en mi casa a la hora que pedí."</em></td>
+        </tr>
+        <tr>
+          <td><div class="pv-badge">Confianza</div><br>Cada vez es un barbero diferente. No sabe qué resultado va a obtener.</td>
+          <td>El mismo barbero, la misma calidad. Relación personal y continua.</td>
+          <td><em>"Mi barbero ya sabe cómo me gusta el corte."</em></td>
+        </tr>
+        <tr>
+          <td><div class="pv-badge">Precio</div><br>Siente que paga de más sin saber exactamente qué incluye el servicio.</td>
+          <td>Precios claros, servicios definidos, sin cobros sorpresa.</td>
+          <td><em>"Sé lo que pago y lo que recibo. Sin sorpresas."</em></td>
+        </tr>
+        <tr>
+          <td><div class="pv-badge">Disponibilidad</div><br>La barbería del barrio solo abre de día cuando él está en el trabajo.</td>
+          <td>Horarios flexibles: noches, fines de semana, días festivos.</td>
+          <td><em>"Me corto cuando puedo, no cuando la barbería puede."</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="frase-box">
+    <div class="label">Actividad grupal — 15 minutos — Construcción de la frase comercial</div>
+    <blockquote style="margin-top:1rem;">
+      "Le llevamos un corte profesional a <span class="frase-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>, en <span class="frase-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>, a la hora que él elija, sin que tenga que moverse de <span class="frase-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>."
+    </blockquote>
+    <p style="margin-top:1rem; font-size:0.8rem; color:rgba(0,0,0,0.5);">Esta frase será la base de cómo se presenten en redes sociales y por WhatsApp desde el día uno.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     BLOQUE 04: MODELO INICIAL
+════════════════════════════════════════ -->
+<div class="editorial-break">
+  <span>Bloque 04 — Modelo inicial</span>
+  <span class="arrow">→</span>
+</div>
+
+<div class="bloque-section alt">
+  <div class="bs-header">
+    <h2 class="blanco">¿Cómo va a funcionar<br>nuestro<br><em style="font-style:italic; color:var(--lima);">servicio?</em></h2>
+    <div class="bs-num blanco">04</div>
+  </div>
+
+  <p class="intro-p blanco">
+    Definimos qué ofrecemos exactamente. Este catálogo no tiene que ser perfecto — tiene que ser claro y ejecutable desde el primer día.
+  </p>
+
+  <div class="servicios-grid">
+    <div class="servicio-cell">
+      <div class="s-num">01</div>
+      <h4>Corte básico</h4>
+      <p>Corte de cabello estándar, limpieza de cuello y perfil. El servicio base del negocio.</p>
+    </div>
+    <div class="servicio-cell">
+      <div class="s-num">02</div>
+      <h4>Corte y barba</h4>
+      <p>Servicio completo. El más popular entre hombres de 20 a 40 años. Mayor ticket promedio.</p>
+    </div>
+    <div class="servicio-cell">
+      <div class="s-num">03</div>
+      <h4>Servicio familiar</h4>
+      <p>Papá e hijos en un solo turno. Ideal para fines de semana. Fomenta lealtad de largo plazo.</p>
+    </div>
+    <div class="servicio-cell">
+      <div class="s-num">04</div>
+      <h4>Servicio corporativo</h4>
+      <p>Grupos de trabajo. Se agenda con anticipación. Volumen garantizado en un solo desplazamiento.</p>
+    </div>
+    <div class="servicio-cell">
+      <div class="s-num">05</div>
+      <h4>Membresía mensual</h4>
+      <p>El cliente paga un monto fijo al mes y recibe cortes programados. Ingreso predecible para el barbero.</p>
+    </div>
+    <div class="servicio-cell abierto">
+      <div class="s-num">06</div>
+      <h4>¿Qué propone el grupo?</h4>
+      <p>Esta casilla la completa el equipo hoy. ¿Qué servicio falta? ¿Qué pide la gente del barrio?</p>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem;">
+    <div class="label" style="color:rgba(255,255,255,0.3); margin-bottom:1rem;">El modelo en seis preguntas clave</div>
+    <div class="canvas-wrap">
+      <div class="canvas-row tres">
+        <div class="canvas-cell">
+          <h4>¿Quién es nuestro cliente?</h4>
+          <p>Hombres de 18 a 45 años en Caracas oeste: Caricuao, Antimano, Montalbán, El Paraíso, La Vega. Valoran comodidad, tiempo y confianza.</p>
+        </div>
+        <div class="canvas-cell destacado">
+          <h4>¿Qué problema resolvemos?</h4>
+          <p>Eliminamos el traslado, la espera y los horarios inflexibles. El cliente recibe su corte donde está y cuando puede.</p>
+        </div>
+        <div class="canvas-cell">
+          <h4>¿Cómo llegamos al cliente?</h4>
+          <p>WhatsApp Business, Instagram y referidos boca a boca. Sin local físico al inicio. Cero inversión en infraestructura.</p>
+        </div>
+      </div>
+      <div class="canvas-row tres">
+        <div class="canvas-cell lima-cell">
+          <h4>¿Cómo cobramos?</h4>
+          <p>Por servicio individual o membresía mensual. Pago al momento de la atención. Sin fiado. Sin deuda.</p>
+        </div>
+        <div class="canvas-cell">
+          <h4>¿Qué necesitamos para operar?</h4>
+          <p>Equipos propios, barbero comprometido, disponibilidad de horario y canal de comunicación activo con el cliente.</p>
+        </div>
+        <div class="canvas-cell">
+          <h4>¿Cuál es la meta del piloto?</h4>
+          <p>Validar demanda en 30 días. Medir cuántos clientes podemos atender y si el modelo genera ingresos reales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     ENTREGABLE
+════════════════════════════════════════ -->
+<div class="entregable-section">
+  <div class="label" style="color:rgba(255,255,255,0.35); margin-bottom:1rem;">Al cerrar esta sesión</div>
+  <h2>Lo que nos<br>llevamos <em>hoy.</em></h2>
+
+  <div class="entregable-grid">
+    <div class="e-item">
+      <div class="e-check">✓</div>
+      <p>Diagnóstico colectivo de capacidades del grupo</p>
+    </div>
+    <div class="e-item">
+      <div class="e-check">✓</div>
+      <p>Perfil del cliente objetivo definido por el equipo</p>
+    </div>
+    <div class="e-item">
+      <div class="e-check">✓</div>
+      <p>Propuesta de valor redactada en palabras propias</p>
+    </div>
+    <div class="e-item">
+      <div class="e-check">✓</div>
+      <p>Catálogo inicial de servicios acordado por todos</p>
+    </div>
+    <div class="e-item">
+      <div class="e-check">✓</div>
+      <p>Modelo de negocio simplificado completo</p>
+    </div>
+    <div class="e-item">
+      <div class="e-check">✓</div>
+      <p>Frase comercial de presentación lista para usar</p>
+    </div>
+  </div>
+
+  <div class="proxima">
+    <div class="label">Próxima sesión — Semana 02</div>
+    <p><strong>Finanzas básicas y presupuesto.</strong> Aprenderemos qué es el dinero realmente, cómo fluye en un negocio, cómo costear un servicio y cómo asegurarnos de que cada corte deja ganancia real.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <span class="label">Barbería VAC · Voluntariado · Escuela de Negocios · Caracas</span>
+  <div class="footer-marca">VAC</div>
+</footer>
+
+</body>
+</html>
